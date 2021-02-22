@@ -59,21 +59,25 @@ class SinkPage:
 
         num_in = 0
         num_total = 0
+        df = pd.DataFrame()
         while True:
             n, x, y, in_circle, language = self.receive_data()
 
             color = self.colors["red"] if in_circle == 1 else self.colors["blue"] 
             num_total += 1
             num_in += 1 if color == self.colors["red"] else 0
-            df = pd.DataFrame({"x": [x], "y": [y], "color": [color], "n": [num_total]})
-            self.df = pd.concat([df, self.df])
-            self.df.set_index("n")
+            new_df = pd.DataFrame({"x": [x], "y": [y], "color": [color], "n": [num_total]})
+            df = pd.concat([new_df, df])
 
             pi = 4 * num_in / num_total
 
             approx.subheader(f"π ≈ {pi}")
             num_messages.subheader(f"Messages: {num_total}")
-            chart1.add_rows(df)
+            
+            if num_total % 100 == 0:
+                df = df.reset_index(drop=True)
+                chart1.add_rows(df)
+                df = pd.DataFrame()
             
             # data_feed.write(self.df)
 
