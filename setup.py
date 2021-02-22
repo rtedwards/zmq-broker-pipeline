@@ -7,7 +7,7 @@ def clean_requirements_list(input_list):
     requirements = [r.split("#")[0].strip() for r in input_list]
     return [
         r
-        for v in requirements
+        for r in requirements
         if len(r) > 0 and not r.startswith("-") and not r.startswith("git+ssh://") and not r.endswith(".whl")
     ]
 
