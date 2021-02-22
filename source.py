@@ -13,6 +13,7 @@ class SourcePage:
         # Initialize random number generator
         random.seed()
 
+        self.n = 0
         self.context: zmq.sugar.context.Context
         self.vent: zmq.sugar.socket.Socket
 
@@ -50,7 +51,8 @@ class SourcePage:
         bar = st.progress(0)
         total = len(data)
         for i, d in enumerate(data):
-            msg_string = f"{d[0]},{d[1]}"
+            self.n += 1
+            msg_string = f"{self.n},{d[0]},{d[1]}"
             msg_bytes = msg_string.encode('UTF-8')
 
             self.vent.send(msg_bytes)

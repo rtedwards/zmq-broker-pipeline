@@ -60,9 +60,9 @@ class SinkPage:
         num_in = 0
         num_total = 0
         while True:
-            x, y = self.receive_data()
+            n, x, y, in_circle, language = self.receive_data()
 
-            color = self.colors["red"] if (x**2 + y**2) <= 1 else self.colors["blue"] 
+            color = self.colors["red"] if in_circle == 1 else self.colors["blue"] 
             num_total += 1
             num_in += 1 if color == self.colors["red"] else 0
             df = pd.DataFrame({"x": [x], "y": [y], "color": [color], "n": [num_total]})
@@ -82,8 +82,8 @@ class SinkPage:
         # TODO wrap in method
         msg = self.sink.recv().decode('utf-8')
         msg = str(msg)
-        x, y = msg.split(",")
-        return ( float(x), float(y) )
+        n, x, y, in_circle, language = msg.split(",")
+        return ( int(n), float(x), float(y), int(in_circle), language )
 
     def setup_socket(self, port: str):
         self.context = zmq.Context()
