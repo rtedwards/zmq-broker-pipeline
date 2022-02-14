@@ -1,7 +1,5 @@
 # zmq-broker-pipeline
-Simple example of using ZeroMQ as distributed data processing pipeline to approximate π.  
-Points are randomly generated between [-1, 1] in x and y axes.  The number of points that fall within the unit circle
-over the number of points that fall outside the unit circle approachs π as the limit -> ∞.
+Simple example of using ZeroMQ as distributed data processing pipeline to approximate π. Points are randomly generated between [-1, 1] in x and y axes.  The number of points that fall within the unit circle over the number of points that fall outside the unit circle approachs π as the limit -> ∞.
 
 ![ZMQ Pipeline Approximate Pi](./docs/zmq-pipeline.gif?raw=true "Approximate Pi")
 
