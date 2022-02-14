@@ -19,7 +19,7 @@ class SourcePage:
 
     def display(self):
 
-        st.title("Ventillator")
+        st.title("Ventilator")
 
         # ---- USER INPUTS ---- #
         port = st.sidebar.number_input(label="Port:", value=5557)

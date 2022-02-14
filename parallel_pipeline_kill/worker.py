@@ -2,19 +2,32 @@ import sys
 import time
 import zmq
 
+from tools.logging_utils import setup_logger
+
+# TODO: Context manager for ZMQ Ports
+
+RECEIVER_PORT = "tcp://localhost:5557"
+SENDER_PORT = "tcp://localhost:5558"
+CONTROLLER_PORT = "tcp://localhost:5559"
+
+logger = setup_logger()
+
 context = zmq.Context()
 
 # Socket to receive messages on
+logger.info(f"Receiver Port: {RECEIVER_PORT}")
 receiver = context.socket(zmq.PULL)
-receiver.connect("tcp://localhost:5557")
+receiver.connect(RECEIVER_PORT)
 
 # Socket to send messages to
+logger.info(f"Sener Port: {SENDER_PORT}")
 sender = context.socket(zmq.PUSH)
-sender.connect("tcp://localhost:5558")
+sender.connect(SENDER_PORT)
 
 # Socket for control input
+logger.info(f"Controller Port: {CONTROLLER_PORT}")
 controller = context.socket(zmq.SUB)
-controller.connect("tcp://localhost:5559")
+controller.connect(CONTROLLER_PORT)
 controller.setsockopt(zmq.SUBSCRIBE, b"")
 
 # Process messages from receiver and controller
