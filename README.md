@@ -1,5 +1,6 @@
 # zmq-broker-pipeline
 Simple example using ZeroMQ as distributed data processing pipeline
+![ZMQ Pipeline Approximate Pi](./docs/zmq-pipeline.gif?raw=true "Approximate Pi")
 
 TODO: UML diagram and the ZeroMQ pattern
 TODO: artifically slower worker computation
